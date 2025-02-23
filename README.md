@@ -7,9 +7,9 @@
 ---
 
 ```
-mkdir symfony7-test
-cd symfony7-test
-git clone https://github.com/rzeronte/symfony7-test.git .
+mkdir symfony-480
+cd symfony-480
+git clone https://github.com/rzeronte/symfony-480.git .
 make build
 make up
 ```
