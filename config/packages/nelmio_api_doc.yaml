@@ -1,0 +1,277 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: 480 - Technical Test By Eduardo Rodríguez!
+            description: Test by Eduardo Rodríguez!
+            version: 1.0.0
+        paths:
+            /api/measurement:
+                post:
+                    summary: "Create a new measurement"
+                    description: "This endpoint receives the necessary data to create a measurement for a wine, associated with a sensor."
+                    tags:
+                        - "Measurement"
+                    requestBody:
+                        required: true
+                        content:
+                            application/json:
+                                schema:
+                                    type: object
+                                    properties:
+                                        id:
+                                            type: string
+                                            description: "Unique ID of the measurement. (A new one is generated if not provided)"
+                                        sensor_id:
+                                            type: string
+                                            description: "ID of the sensor associated with the measurement"
+                                        wine_id:
+                                            type: string
+                                            description: "ID of the wine associated with the measurement"
+                                        year:
+                                            type: integer
+                                            description: "Year of the measurement"
+                                        color:
+                                            type: string
+                                            description: "Color of the wine in hexadecimal format"
+                                        temperature:
+                                            type: number
+                                            format: float
+                                            description: "Temperature of the measurement in Celsius degrees"
+                                        alcohol_content:
+                                            type: number
+                                            format: float
+                                            description: "Alcohol content of the measurement"
+                                        ph:
+                                            type: number
+                                            format: float
+                                            description: "pH level of the measurement"
+                                    required:
+                                        - sensor_id
+                                        - wine_id
+                                        - year
+                                        - color
+                                        - temperature
+                                        - alcohol_content
+                                        - ph
+                    responses:
+                        '200':
+                            description: "Measurement created successfully"
+                            content:
+                                application/json:
+                                    schema:
+                                        type: object
+                                        properties:
+                                            id:
+                                                type: string
+                                                description: "ID of the created measurement"
+                        '400':
+                            description: "Invalid request, incomplete or incorrect data"
+            /api/sensor:
+                post:
+                    summary: "Create a new sensor"
+                    description: "This endpoint receives the necessary data to create a sensor in the system."
+                    tags:
+                        - "Sensor"
+                    requestBody:
+                        required: true
+                        content:
+                            application/json:
+                                schema:
+                                    type: object
+                                    properties:
+                                        id:
+                                            type: string
+                                            description: "Unique ID of the sensor. (A new one is generated if not provided)"
+                                        name:
+                                            type: string
+                                            description: "Name of the sensor"
+                                    required:
+                                        - name
+                    responses:
+                        '200':
+                            description: "Sensor created successfully"
+                            content:
+                                application/json:
+                                    schema:
+                                        type: object
+                                        properties:
+                                            id:
+                                                type: string
+                                                description: "ID of the created sensor"
+                        '400':
+                            description: "Invalid request, incomplete or incorrect data"
+                get:
+                    summary: "Get the sensors"
+                    description: "This endpoint returns a list of registered sensors, with pagination support."
+                    tags:
+                        - "Sensor"
+                    parameters:
+                        - in: query
+                          name: page
+                          required: false
+                          schema:
+                              type: integer
+                              default: 1
+                          description: "Page number for pagination"
+                        - in: query
+                          name: limit
+                          required: false
+                          schema:
+                              type: integer
+                              default: 10
+                          description: "Maximum number of sensors per page"
+                    responses:
+                        '200':
+                            description: "List of sensors obtained successfully"
+                            content:
+                                application/json:
+                                    schema:
+                                        type: array
+                                        items:
+                                            type: object
+                                            properties:
+                                                id:
+                                                    type: string
+                                                    description: "Unique ID of the sensor"
+                                                name:
+                                                    type: string
+                                                    description: "Name of the sensor"
+                        '400':
+                            description: "Incorrect or missing request parameters"
+            /api/wine:
+                get:
+                    summary: "Get the wines and his measurements"
+                    description: "This endpoint returns a list of registered wines, with pagination support."
+                    tags:
+                        - "Wine"
+                    parameters:
+                        - in: query
+                          name: page
+                          required: false
+                          schema:
+                              type: integer
+                              default: 1
+                          description: "Page number for pagination"
+                        - in: query
+                          name: limit
+                          required: false
+                          schema:
+                              type: integer
+                              default: 10
+                          description: "Maximum number of wines per page"
+                    responses:
+                        '200':
+                            description: "List of wines obtained successfully"
+                            content:
+                                application/json:
+                                    schema:
+                                        type: array
+                                        items:
+                                            type: object
+                                            properties:
+                                                id:
+                                                    type: string
+                                                    description: "Unique ID of the wine"
+                                                name:
+                                                    type: string
+                                                    description: "Name of the wine"
+                                                year:
+                                                    type: integer
+                                                    description: "Year of the wine"
+                        '400':
+                            description: "Incorrect or missing request parameters"
+            /api/login:
+                post:
+                    summary: "Log in"
+                    description: "This endpoint allows the user to log in by providing their credentials. It returns a JWT for future authentication."
+                    tags:
+                        - "Authentication"
+                    requestBody:
+                        required: true
+                        content:
+                            application/json:
+                                schema:
+                                    type: object
+                                    properties:
+                                        email:
+                                            type: string
+                                            description: "User's email or username"
+                                        password:
+                                            type: string
+                                            description: "User's password"
+                    responses:
+                        '200':
+                            description: "Successful login"
+                            content:
+                                application/json:
+                                    schema:
+                                        type: object
+                                        properties:
+                                            token:
+                                                type: string
+                                                description: "JWT token for future requests"
+                        '400':
+                            description: "Incorrect credentials"
+                        '401':
+                            description: "Unauthorized, credentials not provided or invalid"
+            /api/register:
+                post:
+                    summary: "Register a new user"
+                    description: "This endpoint allows registering a new user by providing their email, password, and roles. The user will be created and can log in afterwards."
+                    tags:
+                        - "Authentication"
+                    requestBody:
+                        required: true
+                        content:
+                            application/json:
+                                schema:
+                                    type: object
+                                    properties:
+                                        email:
+                                            type: string
+                                            description: "User's email"
+                                        password:
+                                            type: string
+                                            description: "User's password"
+                                        roles:
+                                            type: array
+                                            items:
+                                                type: string
+                                            description: "User's roles (e.g. 'ROLE_USER')"
+                    responses:
+                        '201':
+                            description: "User successfully registered"
+                            content:
+                                application/json:
+                                    schema:
+                                        type: object
+                                        properties:
+                                            id:
+                                                type: string
+                                                description: "Unique ID of the created user"
+                                            email:
+                                                type: string
+                                                description: "Email of the new user"
+                                            roles:
+                                                type: array
+                                                items:
+                                                    type: string
+                                                description: "Roles assigned to the new user"
+                        '400':
+                            description: "Incorrect registration data"
+                        '409':
+                            description: "The email is already in use"
+        servers:
+            - url: https://localhost/
+              description: API over HTTPS
+        components:
+            securitySchemes:
+                Bearer:
+                    type: http
+                    scheme: bearer
+                    bearerFormat: JWT
+        security:
+            - Bearer: []
+    areas: # to filter documented areas
+        path_patterns:
+            - ^/api(?!/doc$) # Accepts routes under /api except /api/doc

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Backoffice\Domain\Entity\Measurement\Measurement" table="measurement">
+        <id name="id" type="UUIDType"/>
+        <field name="year" column="year" type="WineYearType"/>
+        <field name="color" column="color" type="MeasurementColorType"/>
+        <field name="temperature" column="temperature" type="MeasurementTemperatureType"/>
+        <field name="alcoholContent" column="alcohol_content" type="MeasurementAlcoholContentType"/>
+        <field name="ph" column="ph" type="MeasurementPhType"/>
+        <many-to-one field="wine" target-entity="App\Backoffice\Domain\Entity\Wine\Wine" inversed-by="measurements">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+            <join-column name="wine_id" nullable="false"/>
+        </many-to-one>
+        <many-to-one field="sensor" target-entity="App\Backoffice\Domain\Entity\Sensor\Sensor" inversed-by="measurements">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+            <join-column name="sensor_id" nullable="false"/>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>

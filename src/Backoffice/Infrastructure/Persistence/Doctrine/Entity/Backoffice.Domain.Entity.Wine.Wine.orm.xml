@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="App\Backoffice\Domain\Entity\Wine\Wine" table="wine">
+        <id name="id" type="UUIDType"/>
+        <field name="name" column="name" type="WineNameType"/>
+        <field name="year" column="year" type="WineYearType"/>
+        <one-to-many
+            field="measurements"
+            target-entity="App\Backoffice\Domain\Entity\Measurement\Measurement"
+            mapped-by="wine"
+        >
+        </one-to-many>
+    </entity>
+</doctrine-mapping>
