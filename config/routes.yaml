@@ -1,0 +1,39 @@
+# doc
+app.swagger_ui:
+    path: /api/doc
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
+
+# auth register
+api_register:
+    path: /api/register
+    controller: App\Auth\Infrastructure\Controller\AuthController::register
+    methods: POST
+
+# auth login    
+api_login_check:
+    path: /api/login
+    methods: POST
+
+# wines    
+app.rest.retrieve_wines.page:
+    path: /api/wine
+    methods: GET
+    controller: 'App\Backoffice\Infrastructure\Controller\Wines\GetWinesController'
+
+# sensors
+app.rest.retrieve_sensors.page:
+    path: /api/sensor
+    methods: GET
+    controller: 'App\Backoffice\Infrastructure\Controller\Sensor\GetSensorsController'
+
+app.rest.create_sensor.page:
+    path: /api/sensor
+    methods: POST
+    controller: 'App\Backoffice\Infrastructure\Controller\Sensor\CreateSensorController'
+
+# measurements
+app.rest.create_measurement.page:
+    path: /api/measurement
+    methods: POST
+    controller: 'App\Backoffice\Infrastructure\Controller\Measurement\CreateMeasurementController'

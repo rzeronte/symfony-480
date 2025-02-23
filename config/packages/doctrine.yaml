@@ -1,0 +1,62 @@
+doctrine:
+    dbal:
+        url: '%env(resolve:DATABASE_URL)%'
+        #schema_filter: "~^(?!doctrine_migration_versions$)~"
+
+        # IMPORTANT: You MUST configure your server version,
+        # either here or in the DATABASE_URL env var (see .env file)
+        #server_version: '16'
+        types:
+            UUIDType: App\Backoffice\Infrastructure\Persistence\Doctrine\Type\UUIDType
+            WineNameType: App\Backoffice\Infrastructure\Persistence\Doctrine\Type\WineNameType
+            WineYearType: App\Backoffice\Infrastructure\Persistence\Doctrine\Type\WineYearType
+            MeasurementColorType: App\Backoffice\Infrastructure\Persistence\Doctrine\Type\MeasurementColorType
+            MeasurementTemperatureType: App\Backoffice\Infrastructure\Persistence\Doctrine\Type\MeasurementTemperatureType
+            MeasurementAlcoholContentType: App\Backoffice\Infrastructure\Persistence\Doctrine\Type\MeasurementAlcoholContentType
+            MeasurementPhType: App\Backoffice\Infrastructure\Persistence\Doctrine\Type\MeasurementPhType
+            SensorNameType: App\Backoffice\Infrastructure\Persistence\Doctrine\Type\SensorNameType
+        profiling_collect_backtrace: '%kernel.debug%'
+        use_savepoints: true
+    orm:
+        auto_generate_proxy_classes: true
+        enable_lazy_ghost_objects: true
+        report_fields_where_declared: true
+        validate_xml_mapping: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        mappings:
+            App:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Backoffice/Infrastructure/Persistence/Doctrine/Entity/'
+                prefix: 'App'
+                alias: App
+            Auth: 
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Auth/Infrastructure/Persistence/Doctrine/Entity/'
+                prefix: 'App\Auth' 
+                alias: Auth
+
+        controller_resolver:
+            auto_mapping: true
+
+when@prod:
+    doctrine:
+        orm:
+            auto_generate_proxy_classes: false
+            proxy_dir: '%kernel.build_dir%/doctrine/orm/Proxies'
+            query_cache_driver:
+                type: pool
+                pool: doctrine.system_cache_pool
+            result_cache_driver:
+                type: pool
+                pool: doctrine.result_cache_pool
+
+    framework:
+        cache:
+            pools:
+                doctrine.result_cache_pool:
+                    adapter: cache.app
+                doctrine.system_cache_pool:
+                    adapter: cache.system
