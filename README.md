@@ -38,7 +38,7 @@ Este comando ejecutará en orden los siguientes:
 - `make test`: Lanza los tests
 - `make coverage`: Genera reporte de coverage
 - `make php-cs-fixer`: Lanza linter con autofix
-- `make phpstan`: Lanza analizados estático
+- `make phpstan`: Lanza analizador estático
 
 ---
 
