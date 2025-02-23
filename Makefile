@@ -75,11 +75,15 @@ php-cs-fixer: ## Run PHP-CS-Fixer
 load-fixtures: ## Load Wines and Users
 	@$(DOCKER_COMP) exec -e PHP_MEMORY_LIMIT=-1 php php -d memory_limit=-1 ./bin/console doctrine:fixtures:load -n
 
+jwt-generate-keypair: ## jwt secrets
+	@$(DOCKER_COMP) exec -e PHP_MEMORY_LIMIT=-1 php php -d memory_limit=-1 ./bin/console lexik:jwt:generate-keypair --overwrite -n
+
 phpstan: ## Run PHPStan analysis
 	@$(DOCKER_COMP) exec -e php php ./vendor/bin/phpstan
 
 reset-app: ## Reset the application: drop and recreate database, run tests, generate coverage, fix PHP code style, and run PHPStan
 	make reset-db
+	make jwt-generate-keypair
 	make load-fixtures
 	make test
 	make coverage

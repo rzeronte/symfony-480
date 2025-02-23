@@ -35,6 +35,7 @@ make reset-app
 Este comando ejecutará en orden los siguientes:
 
 - `make reset-db`: Resetea BBDD y lanza migraciones
+- `make jwt-generate-keypair`: Genera los secretos para JWT
 - `make load-fixtures`: Carga de fixtures
 - `make test`: Lanza los tests
 - `make coverage`: Genera reporte de coverage
@@ -53,31 +54,36 @@ Disponemos de una serie de comandos personalizados para la aplicación:
 
 ---
 
-2) `` make load-fixtures``
+2) `` make jwt-generate-keypair``
+
+![Descripción de la imagen](./doc/screenshoot_jwt.png)
+
+---
+3) `` make load-fixtures``
 
 ![Descripción de la imagen](./doc/screenshoot_load_fixtures.png)
 
 ---
 
-3) `` make test``
+4) `` make test``
 
 ![Descripción de la imagen](./doc/screenshoot_unittest.png)
 
 ---
 
-4) `` make coverage``
+5) `` make coverage``
 
 ![Descripción de la imagen](./doc/screenshoot_cli_coverage.png)
 
 ---
 
-5) `` make php-cs-fixer``
+6) `` make php-cs-fixer``
 
 ![Descripción de la imagen](./doc/screenshoot_csfixer.png)
 
 ---
 
-6) `` make phpstan``
+7) `` make phpstan``
 
 ![Descripción de la imagen](./doc/screenshoot_phpstan.png)
 
