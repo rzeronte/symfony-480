@@ -7,12 +7,15 @@
 
 ---
 
+# Instalación
+
 ```
 mkdir symfony-480
 cd symfony-480
 git clone https://github.com/rzeronte/symfony-480.git .
 make build
 make up
+make reset-app
 ```
 
 ---
