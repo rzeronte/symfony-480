@@ -8,7 +8,7 @@ use App\Shared\ValueObject\UUID;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class InMemoryWineRepository implements WineRepository
 {
@@ -34,7 +34,7 @@ class InMemoryWineRepository implements WineRepository
         $sensor = $this->wines->get($id->value());
 
         if (!$sensor) {
-            throw new NotFoundHttpException();
+            throw new BadRequestHttpException("InMemory: Wine with ID {$id->value()} not found.");
         }
 
         return $sensor;
@@ -42,7 +42,13 @@ class InMemoryWineRepository implements WineRepository
 
     public function findAll(?int $page, ?int $limit): array
     {
-        return [];
+        $results = $this->wines;
+        $criteria = Criteria::create()
+            ->setFirstResult(($page - 1) * $limit)
+            ->setMaxResults($limit)
+        ;
+
+        return $results->matching($criteria)->toArray();
     }
 
     public function searchCount(): int

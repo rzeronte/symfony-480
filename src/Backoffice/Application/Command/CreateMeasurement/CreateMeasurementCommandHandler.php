@@ -5,12 +5,14 @@ namespace App\Backoffice\Application\Command\CreateMeasurement;
 use App\Backoffice\Domain\Entity\Measurement\Measurement;
 use App\Backoffice\Domain\Entity\Measurement\ValueObject\MeasurementAlcoholContent;
 use App\Backoffice\Domain\Entity\Measurement\ValueObject\MeasurementColor;
+use App\Backoffice\Domain\Entity\Measurement\ValueObject\MeasurementId;
 use App\Backoffice\Domain\Entity\Measurement\ValueObject\MeasurementPh;
 use App\Backoffice\Domain\Entity\Measurement\ValueObject\MeasurementTemperature;
+use App\Backoffice\Domain\Entity\Sensor\ValueObject\SensorId;
+use App\Backoffice\Domain\Entity\Wine\ValueObject\WineId;
 use App\Backoffice\Domain\Repository\MeasurementRepository;
 use App\Backoffice\Domain\Repository\SensorRepository;
 use App\Backoffice\Domain\Repository\WineRepository;
-use App\Shared\ValueObject\UUID;
 use App\Shared\ValueObject\YearNotNullable;
 use Assert\AssertionFailedException;
 
@@ -36,10 +38,10 @@ class CreateMeasurementCommandHandler
     public function __invoke(CreateMeasurementCommand $command): void
     {
         $measurement = Measurement::from(
-            UUID::from($command->getId()),
+            MeasurementId::from($command->getId()),
             YearNotNullable::from($command->getYear()),
-            $this->wineRepository->getByIdOrFail(UUID::from($command->getWineId())),
-            $this->sensorRepository->getByIdOrFail(UUID::from($command->getSensorId())),
+            $this->wineRepository->getByIdOrFail(WineId::from($command->getWineId())),
+            $this->sensorRepository->getByIdOrFail(SensorId::from($command->getSensorId())),
             MeasurementColor::from($command->getColor()),
             MeasurementTemperature::from($command->getTemperature()),
             MeasurementAlcoholContent::from($command->getAlcoholContent()),

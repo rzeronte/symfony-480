@@ -25,7 +25,7 @@ final class WineYearType extends IntegerType
 
     public function convertToPHPValue($value, AbstractPlatform $platform): YearNotNullable|int|null
     {
-        return null === $value ? YearNotNullable::from(0) : YearNotNullable::from($value);
+        return null === $value ? YearNotNullable::from(date('Y')) : YearNotNullable::from($value);
     }
 
     public function getClassName(): string

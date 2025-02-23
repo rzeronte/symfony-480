@@ -5,10 +5,10 @@ namespace App\Backoffice\Infrastructure\Persistence\Doctrine\Repository;
 use App\Backoffice\Domain\Entity\Wine\Wine;
 use App\Backoffice\Domain\Repository\WineRepository;
 use App\Shared\ValueObject\UUID;
-use Assert\AssertionFailedException;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\QueryException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class WineDoctrineRepository implements WineRepository
 {
@@ -25,15 +25,12 @@ class WineDoctrineRepository implements WineRepository
         $this->entityManager->flush();
     }
 
-    /**
-     * @throws AssertionFailedException
-     */
     public function getByIdOrFail(UUID $id): Wine
     {
         $sensor = $this->entityManager->getRepository(Wine::class)->find($id->value());
 
         if (!$sensor) {
-            throw new \RuntimeException("Wine with ID {$id->value()} not found.");
+            throw new BadRequestHttpException("Doctrine: Wine with ID {$id->value()} not found.");
         }
 
         return $sensor;

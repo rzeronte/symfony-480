@@ -4,7 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <entity name="App\Backoffice\Domain\Entity\Sensor\Sensor" table="sensor">
-        <id name="id" type="UUIDType"/>
+        <id name="id" type="SensorIdType"/>
         <field name="name" column="name" type="SensorNameType"/>
     </entity>
 </doctrine-mapping>

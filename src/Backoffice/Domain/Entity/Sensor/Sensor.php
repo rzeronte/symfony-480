@@ -2,26 +2,26 @@
 
 namespace App\Backoffice\Domain\Entity\Sensor;
 
+use App\Backoffice\Domain\Entity\Sensor\ValueObject\SensorId;
 use App\Shared\ValueObject\StringNotBlank;
-use App\Shared\ValueObject\UUID;
 
 class Sensor implements \JsonSerializable
 {
-    private UUID $id;
+    private SensorId $id;
     private StringNotBlank $name;
 
-    private function __construct(UUID $id, StringNotBlank $name)
+    private function __construct(SensorId $id, StringNotBlank $name)
     {
         $this->id = $id;
         $this->name = $name;
     }
 
-    public static function from(UUID $id, StringNotBlank $name): Sensor
+    public static function from(SensorId $id, StringNotBlank $name): Sensor
     {
         return new self($id, $name);
     }
 
-    public function getId(): UUID
+    public function getId(): SensorId
     {
         return $this->id;
     }

@@ -2,21 +2,21 @@
 
 namespace App\Backoffice\Domain\Entity\Wine;
 
+use App\Backoffice\Domain\Entity\Wine\ValueObject\WineId;
 use App\Shared\ValueObject\StringNotBlank;
-use App\Shared\ValueObject\UUID;
 use App\Shared\ValueObject\YearNotNullable;
 use Doctrine\Common\Collections\Collection;
 
 class Wine implements \JsonSerializable
 {
-    private UUID $id;
+    private WineId $id;
     private YearNotNullable $year;
 
     private StringNotBlank $name;
 
     private Collection $measurements;
 
-    public function __construct(UUID $id, YearNotNullable $year, StringNotBlank $name, Collection $measurements)
+    private function __construct(WineId $id, YearNotNullable $year, StringNotBlank $name, Collection $measurements)
     {
         $this->id = $id;
         $this->year = $year;
@@ -24,12 +24,12 @@ class Wine implements \JsonSerializable
         $this->measurements = $measurements;
     }
 
-    public static function from(UUID $id, YearNotNullable $year, StringNotBlank $name, Collection $measurements): Wine
+    public static function from(WineId $id, YearNotNullable $year, StringNotBlank $name, Collection $measurements): Wine
     {
         return new self($id, $year, $name, $measurements);
     }
 
-    public function getId(): UUID
+    public function getId(): WineId
     {
         return $this->id;
     }

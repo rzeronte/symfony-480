@@ -9,3 +9,4 @@ parameters:
         - tests/
     excludePaths:
         - src/Backoffice/Infrastructure/
+        - src/DataFixtures/

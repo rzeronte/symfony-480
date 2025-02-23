@@ -7,6 +7,8 @@ use Assert\AssertionFailedException;
 
 class UUID
 {
+    protected string $FIELD = '_FIELD_NAME_';
+
     protected string $value;
 
     /**
@@ -33,7 +35,7 @@ class UUID
      */
     private function setValue(string $value): void
     {
-        Assertion::uuid($value, sprintf('%s must be a valid UUID, given: %s', (new \ReflectionClass($this))->getShortName(), $value));
+        Assertion::uuid($value, sprintf('%s must be a valid UUID, given: %s', $this->FIELD, $value));
 
         $this->value = $value;
     }

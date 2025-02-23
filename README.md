@@ -3,6 +3,7 @@
 - [Custom commands](#custom-commands)
 - [Documentación](#documentación)
 - [Reporte cobertura](#documentación)
+- [Usuario de pruebas](#usuario-de-pruebas)
 
 ---
 
@@ -86,9 +87,21 @@ La aplicación ofrece la documentación a través del endpoint `api/docs`.
 
 ![Descripción de la imagen](./doc/screenshoot_swagger.png)
 
+---
 
 # Reporte cobertura
 
 En la carpeta `report` se puede encontrar en formato HTML el reporte de covertura.
 
 ![Descripción de la imagen](./doc/screenshoot_coverage.png)
+
+---
+
+# Usuario de pruebas
+
+Aunque podréis registrar un nuevo usuario si quereis. Se incluye uno en fixtures para pruebas
+
+- email: `dev@testing.com` 
+- password: `password`
+
+![Descripción de la imagen](./doc/screenshoot_usertest.png)

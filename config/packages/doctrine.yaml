@@ -7,7 +7,10 @@ doctrine:
         # either here or in the DATABASE_URL env var (see .env file)
         #server_version: '16'
         types:
-            UUIDType: App\Backoffice\Infrastructure\Persistence\Doctrine\Type\UUIDType
+            UUIDType: App\Shared\Infrastructure\Persistence\Doctrine\Type\UUIDType
+            MeasurementIdType: App\Backoffice\Infrastructure\Persistence\Doctrine\Type\MeasurementIdType
+            SensorIdType: App\Backoffice\Infrastructure\Persistence\Doctrine\Type\SensorIdType
+            WineIdType: App\Backoffice\Infrastructure\Persistence\Doctrine\Type\WineIdType
             WineNameType: App\Backoffice\Infrastructure\Persistence\Doctrine\Type\WineNameType
             WineYearType: App\Backoffice\Infrastructure\Persistence\Doctrine\Type\WineYearType
             MeasurementColorType: App\Backoffice\Infrastructure\Persistence\Doctrine\Type\MeasurementColorType

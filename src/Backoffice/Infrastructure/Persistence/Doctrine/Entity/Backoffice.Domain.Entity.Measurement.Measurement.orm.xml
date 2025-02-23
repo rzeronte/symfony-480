@@ -4,7 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <entity name="App\Backoffice\Domain\Entity\Measurement\Measurement" table="measurement">
-        <id name="id" type="UUIDType"/>
+        <id name="id" type="MeasurementIdType"/>
         <field name="year" column="year" type="WineYearType"/>
         <field name="color" column="color" type="MeasurementColorType"/>
         <field name="temperature" column="temperature" type="MeasurementTemperatureType"/>

@@ -28,6 +28,7 @@ services:
 
     App\Backoffice\Domain\Repository\WineRepository: '@App\Backoffice\Infrastructure\Persistence\Doctrine\Repository\WineDoctrineRepository'
     App\Backoffice\Domain\Repository\SensorRepository: '@App\Backoffice\Infrastructure\Persistence\Doctrine\Repository\SensorDoctrineRepository'
+    App\Backoffice\Domain\Repository\MeasurementRepository: '@App\Backoffice\Infrastructure\Persistence\Doctrine\Repository\MeasurementDoctrineRepository'
 
     App\Backoffice\Application\Command\CreateMeasurement\CreateMeasurementCommandHandler:
         tags: [ 'messenger.message_handler' ]

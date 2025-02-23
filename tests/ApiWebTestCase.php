@@ -49,6 +49,6 @@ class ApiWebTestCase extends WebTestCase
 
     public function getClientForTestingUser(): KernelBrowser
     {
-        return $this->createAuthenticatedClient('johndoe@example.com', 'SecurePassword123');
+        return $this->createAuthenticatedClient('dev@testing.com', 'password');
     }
 }

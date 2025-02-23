@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Backoffice\Infrastructure\Persistence\Doctrine\Type;
+namespace App\Shared\Infrastructure\Persistence\Doctrine\Type;
 
 use App\Shared\ValueObject\UUID;
 use Assert\AssertionFailedException;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\GuidType;
 
-final class UUIDType extends GuidType
+class UUIDType extends GuidType
 {
     public function getName(): string
     {

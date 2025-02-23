@@ -16,7 +16,7 @@ class GetWinesWebTest extends ApiWebTestCase
     public function testRetrieveWinesMustReturnOk(): void
     {
         $client = $this->getClientForTestingUser();
-        $client->jsonRequest('GET', '/api/wines');
+        $client->jsonRequest('GET', '/api/wine');
 
         $this->assertResponseStatusCodeSame(Response::HTTP_OK);
 

@@ -3,9 +3,9 @@
 namespace App\Backoffice\Application\Command\CreateSensor;
 
 use App\Backoffice\Domain\Entity\Sensor\Sensor;
+use App\Backoffice\Domain\Entity\Sensor\ValueObject\SensorId;
 use App\Backoffice\Domain\Repository\SensorRepository;
 use App\Shared\ValueObject\StringNotBlank;
-use App\Shared\ValueObject\UUID;
 use Assert\AssertionFailedException;
 
 class CreateSensorCommandHandler
@@ -23,7 +23,7 @@ class CreateSensorCommandHandler
     public function __invoke(CreateSensorCommand $command): void
     {
         $sensor = Sensor::from(
-            UUID::from($command->getId()),
+            SensorId::from($command->getId()),
             StringNotBlank::from($command->getName()),
         );
 

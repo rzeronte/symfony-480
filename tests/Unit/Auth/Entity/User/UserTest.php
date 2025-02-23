@@ -4,14 +4,10 @@ namespace App\Tests\Unit\Auth\Entity\User;
 
 use App\Auth\Domain\Entity\User\User;
 use App\Shared\ValueObject\UUID;
-use Assert\AssertionFailedException;
 use PHPUnit\Framework\TestCase;
 
 class UserTest extends TestCase
 {
-    /**
-     * @throws AssertionFailedException
-     */
     public function testUserEntityConstraints(): void
     {
         $user = new User();

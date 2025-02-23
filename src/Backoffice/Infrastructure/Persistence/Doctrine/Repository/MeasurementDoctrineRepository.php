@@ -20,4 +20,14 @@ class MeasurementDoctrineRepository implements MeasurementRepository
         $this->entityManager->persist($measurement);
         $this->entityManager->flush();
     }
+
+    public function count(): int
+    {
+        $queryBuilder = $this->entityManager->createQueryBuilder()
+            ->select('count(c.id)')
+            ->from(Measurement::class, 'c');
+
+        return (int) $queryBuilder->getQuery()
+            ->getSingleScalarResult();
+    }
 }

@@ -4,16 +4,16 @@ namespace App\Backoffice\Domain\Entity\Measurement;
 
 use App\Backoffice\Domain\Entity\Measurement\ValueObject\MeasurementAlcoholContent;
 use App\Backoffice\Domain\Entity\Measurement\ValueObject\MeasurementColor;
+use App\Backoffice\Domain\Entity\Measurement\ValueObject\MeasurementId;
 use App\Backoffice\Domain\Entity\Measurement\ValueObject\MeasurementPh;
 use App\Backoffice\Domain\Entity\Measurement\ValueObject\MeasurementTemperature;
 use App\Backoffice\Domain\Entity\Sensor\Sensor;
 use App\Backoffice\Domain\Entity\Wine\Wine;
-use App\Shared\ValueObject\UUID;
 use App\Shared\ValueObject\YearNotNullable;
 
 class Measurement implements \JsonSerializable
 {
-    private UUID $id;
+    private MeasurementId $id;
     private Wine $wine;
     private Sensor $sensor;
     private YearNotNullable $year;
@@ -23,7 +23,7 @@ class Measurement implements \JsonSerializable
     private MeasurementPh $ph;
 
     private function __construct(
-        UUID $id,
+        MeasurementId $id,
         YearNotNullable $year,
         Wine $wine,
         Sensor $sensor,
@@ -43,7 +43,7 @@ class Measurement implements \JsonSerializable
     }
 
     public static function from(
-        UUID $id,
+        MeasurementId $id,
         YearNotNullable $year,
         Wine $wine,
         Sensor $sensor,
@@ -55,7 +55,7 @@ class Measurement implements \JsonSerializable
         return new self($id, $year, $wine, $sensor, $color, $temperature, $graduation, $ph);
     }
 
-    public function getId(): UUID
+    public function getId(): MeasurementId
     {
         return $this->id;
     }

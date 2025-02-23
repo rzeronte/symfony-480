@@ -8,7 +8,7 @@ use App\Shared\ValueObject\UUID;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class InMemorySensorRepository implements SensorRepository
 {
@@ -34,7 +34,7 @@ class InMemorySensorRepository implements SensorRepository
         $sensor = $this->sensors->get($from->value());
 
         if (!$sensor) {
-            throw new NotFoundHttpException();
+            throw new BadRequestHttpException("Sensor with ID {$from->value()} not found.");
         }
 
         return $sensor;

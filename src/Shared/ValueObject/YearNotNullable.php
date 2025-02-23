@@ -2,6 +2,9 @@
 
 namespace App\Shared\ValueObject;
 
+use Assert\Assertion;
+use Assert\AssertionFailedException;
+
 class YearNotNullable
 {
     protected int $value;
@@ -21,8 +24,12 @@ class YearNotNullable
         return $this->value;
     }
 
+    /**
+     * @throws AssertionFailedException
+     */
     private function setValue(int $value): void
     {
+        Assertion::greaterThan($value, 0);
         $this->value = $value;
     }
 }

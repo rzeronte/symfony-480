@@ -24,7 +24,7 @@ class CreateMeasurementController extends ApiCommandPage
             new CreateMeasurementCommand(
                 $id,
                 $payload->sensor_id ?? '',
-                $payload->wine_id ?? 'e',
+                $payload->wine_id ?? '',
                 $payload->year ?? 0,
                 $payload->color ?? '',
                 $payload->temperature ?? 0.0,

@@ -19,8 +19,8 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $users = [
-            ['email' => 'johndoe@example.com', 'password' => 'SecurePassword123'],
-            ['email' => 'edu@test.com', 'password' => '123456789'],
+            ['email' => 'dev@testing.com', 'password' => 'password'],
+            ['email' => 'edu@testing.com', 'password' => 'password'],
         ];
 
         foreach ($users as $userData) {

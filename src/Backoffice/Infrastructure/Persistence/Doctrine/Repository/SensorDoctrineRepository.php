@@ -8,6 +8,7 @@ use App\Shared\ValueObject\UUID;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\QueryException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class SensorDoctrineRepository implements SensorRepository
 {
@@ -23,7 +24,7 @@ class SensorDoctrineRepository implements SensorRepository
         $sensor = $this->entityManager->getRepository(Sensor::class)->find($from->value());
 
         if (!$sensor) {
-            throw new \RuntimeException("Sensor with ID {$from->value()} not found.");
+            throw new BadRequestHttpException("Sensor with ID {$from->value()} not found.");
         }
 
         return $sensor;
@@ -39,7 +40,7 @@ class SensorDoctrineRepository implements SensorRepository
             ->getSingleScalarResult();
     }
 
-    /** @return array<mixed>
+    /**
      * @throws QueryException
      */
     public function findAll(?int $page, ?int $limit): array
@@ -47,6 +48,7 @@ class SensorDoctrineRepository implements SensorRepository
         $queryBuilder = $this->entityManager->createQueryBuilder()
             ->select('c')
             ->from(Sensor::class, 'c')
+            ->orderBy('c.name', 'ASC')
         ;
 
         $criteria = Criteria::create()->setFirstResult(($page - 1) * $limit)->setMaxResults($limit);
